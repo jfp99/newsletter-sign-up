@@ -1,0 +1,12 @@
+/* Regular */
+@font-face {
+  font-family: "Roboto";
+  src: url(/assets/fonts/Roboto-Regular.ttf);
+  font-weight: 400;
+}
+/* Bold */
+@font-face {
+  font-family: "Roboto";
+  src: url(/assets/fonts/Roboto-Bold.ttf);
+  font-weight: 700;
+}/*# sourceMappingURL=fonts.css.map */
