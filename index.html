@@ -3,49 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <link rel="stylesheet" href="/css/sass.css">
+  <link rel="stylesheet" href="./css/modern-normalize.min.css">
+  <link rel="stylesheet" href="./css/sass.css">
+  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
 </head>
 <body>
-
-  <!-- Subscription form -->
-  <!-- Subscription form -->
-  <div class="card" id="subscription-card">
-    <div class="form-image">
-      <img src="./assets/images/illustration-sign-up-mobile.svg" alt="sign up image">
+                                    <!-- Sign-up form start -->
+<main class="newsletter-main-container">
+  <form class="newsletter-signup-form"  novalidate>
+    <div class="form-header-container">
+      <h1 class="form-header-title">Stay updated!</h1>
+      <p class="form-header-description">Join 60,000+ product managers receiving monthly updates on:</p>
     </div>
-    <div class="content">
-      <h1>Stay updated!</h1>
-      <p>Join 60,000+ product managers receiving monthly updates on:</p>
-
-      <ul class="benefits-list">
-        <li>Product discovery and building what matters</li>
-        <li>Measuring to ensure updates are a success</li>
-        <li>And much more!</li>
-      </ul>
-
-      <form id="subscription-form">
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <span id="error-message">Valid email required</span>
-        </div>
-        <input type="email" placeholder="email@company.com" id="email">
-        <button type="submit">Subscribe to monthly newsletter</button>
-      </form>
+    <ul class="form-list-container">
+      <li class="form-list-description">
+        Product discovery and building what matters
+      </li>
+      <li class="form-list-description">
+        Measuring to ensure updates are a success
+      </li>
+      <li class="form-list-description">
+        And much more!
+      </li>
+    </ul>
+    <div class="form-error-state-container">
+      <label for="email">Email address</label>
+      <span class="form-error-message" aria-live="polite"></span>
     </div>
+    <input class="form-input-field" id="email" 
+      oninput="isValidEmail(inputField.value,inputField,formSubmitButton,formErrorMessage)" 
+      name="email" 
+      type="text" 
+      placeholder="ash#loremcompany.com" 
+      autocomplete="email">
+    <button class="form-submit-button" type="submit">Subscribe to monthly newsletter</button>
+  </form>
+  <div class="decoration-image-container">
+    <picture>
+      <source class="decoration-image desktop" 
+        srcset="assets/images/illustration-sign-up-desktop.svg" 
+        type="image/webp" 
+        media="(min-width: 1440px)">
+      <source class="decoration-image tablet" 
+        srcset="assets/images/illustration-sign-up-tablet.svg" 
+        type="image/webp" 
+        media="(min-width: 768px)">
+      <img class="decoration-image mobile" 
+        srcset="assets/images/illustration-sign-up-mobile.svg" 
+        type="image/svg"  
+        media="(min-width: 375px)">
+    </picture>
   </div>
-
-  <!-- Success message -->
-  <div class="card success-card" id="success-card">
-    <div>
-      <img src="./assets/images/icon-success.svg" alt="success icon">
-      <h2 class="success-title">Thanks for subscribing!</h2>
-      <p>A confirmation email has been sent to <span class="user-email" id="user-email">ash@loremcompany.com</span>. 
-      Please open it and click the button inside to confirm your subscription</p>
-    </div>
-    <button id="dismiss-btn">Dismiss message</button>
-  </div> 
-    <script src="./scripts/script.js"></script>
+</main>
+                                <!-- Sign-up form end -->
+                              <!-- Success message start -->
+<div class="success-message-container hidden">
+  <div class="success-img-container">
+    <img class="success-img" src="assets/images/icon-success.svg" alt="Success Icon">
+  </div>
+  <div>
+    <p class="success-title">Thanks for subscribing!</p>
+    <p class="success-message-description">
+      A confirmation email has been sent to <br><span class="success-span-email">ash@loremcompany.com.</span>
+      Please open it and click the button inside to confirm your subscription.
+    </p>
+  </div>
+  <div class="success-message-dismiss-button-container">
+    <button class="success-message-dismiss-button">Dismiss message</button>
+  </div>
+</div>
+  <!-- Success message end -->
+  <!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Alex</a>.
+  </div> -->
+  <script src="./scripts/script.js"></script>
 </body>
 </html>
