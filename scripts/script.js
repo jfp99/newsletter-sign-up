@@ -48,7 +48,7 @@ return emailRegex.test(email);
 // Show error state
 function showErrorState() {
 formErrorMessage.textContent = "Valid email required";
-inputField.classList.add('input-field-error-state', 'placeholder-field-eror', 'shake-input-fields');
+inputField.classList.add('input-field-error-state', 'placeholder-field-error', 'shake-input-fields');
 formSubmitButton.classList.remove('button-gradient');
 
 // Remove shake animation after it completes
