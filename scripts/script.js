@@ -13,7 +13,7 @@ const successMessageDismissButton = document.querySelector('.success-message-dis
 formSubmitButton.addEventListener('click', handleFormSubmit);
 successMessageDismissButton.addEventListener('click', handleDismiss);
 inputField.addEventListener('input', clearErrorState);
-inputField.addEventListener('input', handleInput); // Added this line
+inputField.addEventListener('input', handleInput);
 
   // New input handler
 function handleInput() {

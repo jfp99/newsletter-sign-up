@@ -104,7 +104,7 @@ label {
     content:url("/assets/images/icon-list.svg");
     position: absolute;
     top:0;
-    left:0;
+    left:0; 
 }
 .form-list-description:nth-child(2) {
     margin: 0.5rem 0;
@@ -118,7 +118,6 @@ label {
     padding: 1rem 1.5rem;
 }
 .form-submit-button {
-  // Your existing styles
 background-color: var(--blue-800);
 color: var(--white);
 padding: 1rem;
