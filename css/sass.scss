@@ -101,10 +101,15 @@ label {
     line-height:1.5;
 }
 .form-list-description::before {
-    content:url("/assets/images/icon-list.svg");
+    content: "";
     position: absolute;
-    top:0;
-    left:0; 
+    top: 2px;
+    left: 0;
+    width: 21px;
+    height: 21px;
+    background-image: url("/assets/images/icon-success.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 .form-list-description:nth-child(2) {
     margin: 0.5rem 0;
