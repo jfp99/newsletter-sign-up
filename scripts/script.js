@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function() {
+  // DOM Elements
 const main = document.querySelector('main');
 const form = document.querySelector('.newsletter-signup-form');
 const inputField = document.querySelector('#email');
@@ -7,80 +9,101 @@ const formErrorMessage = document.querySelector('.form-error-message');
 const formSubmitButton = document.querySelector('.form-submit-button');
 const successMessageDismissButton = document.querySelector('.success-message-dismiss-button');
 
-// Prevent the default behavior of the onsubmit event.
-formSubmitButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    const data = {};
-    const fields = e.target.querySelectorAll("input");
-    for (const field of fields) {
-      data[field.name] = field.value;
-    }
-    const isValid = validationCheck(
-        inputField.value,
-        inputField,
-        formSubmitButton,
-        formErrorMessage,
-        successMessageContainer,
-        main,successSpanEmail
-    );
-    if (isValid) {
-        console.log("Email passed validation");
-        console.log(data);
-    }
-    else {
-        inputField.classList.add('shake-input-fields');
-    }
+// Event Listeners
+formSubmitButton.addEventListener('click', handleFormSubmit);
+successMessageDismissButton.addEventListener('click', handleDismiss);
+inputField.addEventListener('input', clearErrorState);
+inputField.addEventListener('input', handleInput); // Added this line
+
+  // New input handler
+function handleInput() {
+const email = inputField.value.trim();
+if (validateEmail(email)) {
+    formSubmitButton.classList.add('button-gradient');
+    clearErrorState();
+}
+}
+// Handle form submission
+function handleFormSubmit(e) {
+e.preventDefault();
+
+const email = inputField.value.trim();
+const isValid = validateEmail(email);
+
+if (isValid) {
+    showSuccessMessage(email);
+    console.log("Email passed validation:", email);
+} else {
+    showErrorState();
+    console.log("Validation failed");
+}
+}
+
+// Validate email format
+function validateEmail(email) {
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+return emailRegex.test(email);
+}
+
+// Show error state
+function showErrorState() {
+formErrorMessage.textContent = "Valid email required";
+inputField.classList.add('input-field-error-state', 'placeholder-field-eror', 'shake-input-fields');
+formSubmitButton.classList.remove('button-gradient');
+
+// Remove shake animation after it completes
+setTimeout(() => {
+    inputField.classList.remove('shake-input-fields');
+}, 700);
+}
+
+// Clear error state when typing
+function clearErrorState() {
+if (inputField.classList.contains('input-field-error-state')) {
+    inputField.classList.remove('input-field-error-state', 'placeholder-field-eror');
+    formErrorMessage.textContent = "";
+}
+}
+
+// Show success message
+function showSuccessMessage(email) {
+// Update email in success message
+successSpanEmail.textContent = email;
+
+// Hide main form and show success message with animation
+main.classList.add('hidden');
+successMessageContainer.classList.remove('hidden');
+successMessageContainer.classList.add('modal-apear-animation');
+
+// Remove appear animation after completion
+setTimeout(() => {
+    successMessageContainer.classList.remove('modal-apear-animation');
+}, 300);
+}
+
+// Handle dismiss button click
+function handleDismiss() {
+formSubmitButton.classList.remove('button-gradient');
+// Reset form
+form.reset();
+clearErrorState();
+
+// Animate success message closing
+successMessageContainer.classList.add('modal-close-animation');
+
+setTimeout(() => {
+    // Hide success message and show main form
+    successMessageContainer.classList.add('hidden');
+    successMessageContainer.classList.remove('modal-close-animation');
+    main.classList.remove('hidden');
+    
+    // Add appear animation to main form
+    main.classList.add('modal-apear-animation');
+    
+    // Remove appear animation after completion
+    setTimeout(() => {
+    main.classList.remove('modal-apear-animation');
+    }, 300);
+}, 300);
+}
 });
-function dismissSuccessMessage(successMessage,main) {
-        successMessage.classList.add('hidden');
-        main.classList.remove('hidden');
-        main.classList.add('modal-apear-animation');
-}
-function validationCheck(
-        email,
-        inputField,
-        submitButton,
-        errorMessage,
-        successMessage,
-        main,
-        successSpanMessage) {
-    const emailValid = isValidEmail(email,inputField,submitButton, errorMessage);
-    if (emailValid) {
-        main.classList.add('hidden');
-        successMessage.classList.remove('hidden');
-        successMessage.classList.add('modal-apear-animation');
-        successSpanMessage.innerHTML = email;
-        console.log("Subscribe succesful");
-        return true;
-    } else {
-        main.classList.remove('hidden');
-        successMessage.classList.add('hidden');
-        return false;
-    }
-}
-function isValidEmail(
-    email,
-    inputField,
-    submitButton,
-    errorMessage) {
-    const atIndex = email.indexOf("@");
-    const dotIndex = email.lastIndexOf(".");
-    if (atIndex > 0 && dotIndex > atIndex + 1 && dotIndex < email.length - 1) {
-        errorMessage.innerText = "";
-        submitButton.classList.add('button-gradient');
-        inputField.classList.remove('input-field-error-state');
-        inputField.classList.remove('shake-input-fields');
-        inputField.classList.remove('placeholder-field-eror');
-        return true;
-    } else {
-        submitButton.classList.remove('button-gradient');
-        errorMessage.innerText = "Valid email required";
-        inputField.classList.add('input-field-error-state');
-        inputField.classList.add('shake-input-fields');
-        inputField.classList.add('placeholder-field-eror');
-        return false;
-    }
-}
-successMessageDismissButton.addEventListener('click', successMessageDismissButton.addEventListener('click', function () {
-    dismissSuccessMessage(successMessageContainer, main);
-  }));
